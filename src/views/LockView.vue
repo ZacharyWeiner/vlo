@@ -29,10 +29,22 @@
                   {{ jig.message.split(":")[2] }}
                 </div>
               </div>
-              <div class="text-left">{{ jig.message.split(":")[1] }}</div>
+              <div class="text-left">
+                {{ jig.message.split(":")[1].substring(0, 100) }}
+              </div>
             </div>
             <div v-else>
-              <div>{{ jig.message }}</div>
+              <div>{{ jig.message.substring(0, 100) }}</div>
+            </div>
+            <div>
+              <div class="text-right">
+                <a
+                  class="text-xs text-blue-500"
+                  :href="`https://run.network/explorer/?query=${jig.location}&network=main`"
+                  target="_blank"
+                  >view on chain</a
+                >
+              </div>
             </div>
           </div>
           <div v-if="!jigs || jigs.length === 0">
@@ -124,6 +136,7 @@ export default {
         alert(
           "Your message is too long, please upgrade to our pro-subscription"
         );
+        return;
       }
       let _run = new window.Run({
         trust: "*",
