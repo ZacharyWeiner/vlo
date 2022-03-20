@@ -10,18 +10,12 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import Run from "run-sdk";
 export default {
   name: "HomeView",
   setup() {},
   components: {
     HelloWorld,
   },
-  methods: {
-    newRun() {
-      let run = new Run();
-      console.log(run.purse.address);
-    },
-  },
+  methods: {},
 };
 </script>
