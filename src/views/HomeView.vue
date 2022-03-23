@@ -37,18 +37,18 @@
               </div>
             </div>
             <div class="hidden md:flex md:items-center md:space-x-6">
-              <a
-                href="#"
+              <router-link
+                to="/login"
                 class="text-base font-medium text-white hover:text-gray-300"
               >
                 Log in
-              </a>
-              <a
-                href="#"
+              </router-link>
+              <router-link
+                to="/register"
                 class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
               >
-                Start free trial
-              </a>
+                Get Started
+              </router-link>
             </div>
           </nav>
         </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="mt-6 px-5">
                   <router-link
-                    href="/register"
+                    to="/register"
                     class="block text-center w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700"
                     >Register</router-link
                   >
@@ -106,7 +106,7 @@
                   <p class="text-center text-base font-medium text-gray-500">
                     Existing customer?
                     <router-link
-                      href="/login"
+                      to="/login"
                       class="text-gray-900 hover:underline"
                       >Login</router-link
                     >
@@ -843,6 +843,13 @@ export default {
     XIcon,
   },
   setup() {
+    // eslint-disable-next-line no-undef
+    var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
+    //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
+
+    // eslint-disable-next-line no-undef
+    var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
+    console.log(decrypted);
     return {
       navigation,
       features,

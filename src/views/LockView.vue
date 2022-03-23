@@ -314,19 +314,29 @@
       <!--  COLUMN 3 MY Account Info -->
       <div class="col-span-2 bg-gray-100">
         <div class="rounded-xl p-2 m-2 mt-4 flex-1 bg-white">
-          <div
-            class="p-2 pt-2 pb-6 mt-1 text-3xl bg-clip-text text-transparent bg-gradient-to-b from-gray-600 via-gray-700 to-gray-900"
-          >
-            ACCOUNT
+          <div class="flex">
+            <div
+              class="p-2 pt-2 pb-6 mt-1 text-3xl bg-clip-text text-transparent bg-gradient-to-b from-gray-600 via-gray-700 to-gray-900"
+            >
+              ACCOUNT
+            </div>
+            <div class="w-full text-right">
+              <button
+                @click="newAddress"
+                class="items-center mt-1 border border-transparent text-base font-medium rounded-full shadow-sm text-blue-500 hover:text-white hover:bg-blue-500 hover:outline-none hover:ring-2 hover:ring-blue-500"
+              >
+                New Address
+              </button>
+            </div>
           </div>
           <hr />
           <div class="grid grid-cols-2">
             <div class="col-span-1 text-left">Blockchain Address:</div>
             <div class="col-span-1 text-xs">{{ userOwnerAddress }}</div>
             <div class="col-span-1 text-left">VXLockID :</div>
-            <div class="col-span-1 text-xs">{{ user.uid }}</div>
+            <div class="col-span-1 text-xs">{{ user?.uid }}</div>
             <div class="col-span-1 text-left">Email Address :</div>
-            <div class="col-span-1 text-xs">{{ user.email }}</div>
+            <div class="col-span-1 text-xs">{{ user?.email }}</div>
             <div class="col-span-1 text-left">Signing Key :</div>
             <div class="col-span-1 text-xs"></div>
             <div class="col-span-2">
@@ -351,6 +361,7 @@ import { reactive, ref, toRefs } from "vue";
 import { useStore, mapState } from "vuex";
 import { useFirebase } from "./../composition/useFirebase.js";
 import { Switch } from "@headlessui/vue";
+import { useRouter } from "vue-router";
 import {
   Listbox,
   ListboxButton,
@@ -404,14 +415,20 @@ export default {
     ShareIcon,
   },
   setup() {
+    let router = useRouter();
     //const assigned = ref(assignees[0]);
     const labelled = ref(labels[0]);
     const dated = ref(dueDates[0]);
     let store = useStore();
-    store.commit(
-      "setUserPurseKey",
-      "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38"
-    );
+    if (store.state.user === null) {
+      router.push("/login");
+    } else {
+      console.log("User:", store.state.user);
+    }
+    // store.commit(
+    //   "setUserPurseKey",
+    //   "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38"
+    // );
     let enabled = false;
     const state = reactive({
       count: 0,
