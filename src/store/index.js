@@ -16,6 +16,7 @@ export default createStore({
     userLocks: [],
     lockerClassLocation:
       "5b11de644722fdc47f7ac773d3455b6b260a98416935940940b5bb650c0a8fd6_o1",
+    user: null,
   },
   getters: {},
   mutations: {
@@ -36,6 +37,9 @@ export default createStore({
     },
     setUserLocks(state, locks) {
       state.userLocks = locks;
+    },
+    setUser(state, user) {
+      state.user = user;
     },
   },
   actions: {
