@@ -19,7 +19,9 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
-const locksCollection = firestore.collection("locks");
+const locksCollection = firestore
+  .collection("locks")
+  .orderBy("createdAt", "desc");
 
 export function useFirebase(_userId, _address) {
   const locks = ref([]);

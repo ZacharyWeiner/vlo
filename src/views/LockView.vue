@@ -142,7 +142,7 @@
                 <div class="flex-shrink-0">
                   <button
                     @click="createAJig"
-                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-indigo-600 to-blue-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Create
                   </button>
@@ -201,14 +201,16 @@
         </div>
       </div>
       <!--  COLUMN 2 MY LOCKS LIST -->
-      <div class="p-2 mt-4 m-2 bg-gray-100 col-span-3 max-h-screen rounded-xl">
+      <div
+        class="p-2 mt-4 m-2 bg-gradient-to-b from-gray-100 to-gray-300 col-span-3 max-h-screen rounded-xl"
+      >
         <div class="rounded-xl m-2">
           <div
-            class="flex text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-gray-500 via-gray-600 to-gray-900"
+            class="flex text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-gray-500 via-gray-700 to-gray-900"
           >
             <div class="w-full">My Locker</div>
             <div class="pt-4">
-              <button @click="getLocked" class="text-sm text-gray-800">
+              <button @click="getLocked" class="text-sm text-gray-900">
                 Load
               </button>
             </div>
@@ -216,23 +218,74 @@
           <hr class="py-4" />
           <div
             v-if="selectedLock"
-            class="rounded-xl p-2 m-2 max-h-24 overflow-y-scroll bg-gray-100 text-gray-900 border-2 border-green-300"
+            class="-m-4 rounded-xl overflow-y-scroll bg-gradient-to-r from-gray-300 to-gray-400 text-gray-900 mb-6"
           >
-            <div v-if="selectedLock.message?.includes(':')">
-              <div class="text-left text-xs text-gray-800 flex">
-                <div class="w-full">
-                  {{ selectedLock.message.split(":")[0] }}
+            <div
+              v-if="selectedLock.message?.includes(':')"
+              class="w-full flex items-center justify-between p-6 space-x-6"
+            >
+              <div class="flex-1 truncate">
+                <div class="flex items-center space-x-3">
+                  <h3
+                    class="text-gray-900 text-sm text-left font-medium truncate w-full"
+                  >
+                    {{ selectedLock.message.split(":")[0] }}
+                  </h3>
+                  <span
+                    class="flex-shrink-0 inline-block px-2 py-0.5 text-green-800 text-xs font-medium bg-green-100 rounded-full"
+                    >{{
+                      selectedLock.message
+                        .split(":")[2]
+                        ?.substring(
+                          0,
+                          selectedLock.message.split(":")[2].length - 2
+                        )
+                    }}</span
+                  >
                 </div>
-                <div class="text-right text-xs">
-                  {{ selectedLock.message.split(":")[2] }}
-                </div>
+                <p class="text-left mt-1 text-gray-500 text-sm truncate">
+                  {{ selectedLock.message.split(":")[1].substring(0, 100) }}
+                </p>
               </div>
-              <div class="text-left">
-                {{ selectedLock.message.split(":")[1] }}
-              </div>
+              <!-- <img
+                  class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
+                  :src="person.imageUrl"
+                  alt=""
+                /> -->
             </div>
-            <div v-else>
-              <div>{{ selectedLock.message }}</div>
+            <div>
+              <div class="-mt-px flex divide-x divide-gray-200">
+                <div
+                  class="w-0 flex-1 flex rounded bg-gradient-to-b from-orange-500 to-pink-500 m-0.5 mb-0"
+                >
+                  <a
+                    @click="premiumAlert"
+                    class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-100 font-medium border border-transparent rounded-bl-lg hover:text-gray-100"
+                  >
+                    <MailIcon class="w-5 h-5 text-white" aria-hidden="true" />
+                    <span class="ml-3">Send</span>
+                  </a>
+                </div>
+                <div
+                  class="-ml-px w-0 flex-1 flex rounded bg-gradient-to-b from-blue-500 to-indigo-500 m-0.5 mb-0"
+                >
+                  <a
+                    norel
+                    noopener
+                    target="_blank"
+                    :href="`https://www.whatsonchain.com/tx/${
+                      selectedLock.location.split('_')[0]
+                    }`"
+                    class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-100 font-medium border border-transparent rounded-br-lg hover:text-gray-100"
+                  >
+                    <ShareIcon
+                      class="w-5 h-5 text-gray-100"
+                      aria-hidden="true"
+                    />
+                    <span class="ml-3">View On Chain</span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           <ul
@@ -252,7 +305,9 @@
               >
                 <div class="flex-1 truncate">
                   <div class="flex items-center space-x-3">
-                    <h3 class="text-gray-900 text-sm font-medium truncate">
+                    <h3
+                      class="text-gray-900 text-sm text-left font-medium truncate w-full"
+                    >
                       {{ jig.message.split(":")[0] }}
                     </h3>
                     <span
@@ -264,7 +319,7 @@
                       }}</span
                     >
                   </div>
-                  <p class="mt-1 text-gray-500 text-sm truncate">
+                  <p class="text-left mt-1 text-gray-500 text-sm truncate">
                     {{ jig.message.split(":")[1].substring(0, 100) }}
                   </p>
                 </div>
@@ -276,19 +331,20 @@
               </div>
               <div>
                 <div class="-mt-px flex divide-x divide-gray-200">
-                  <div class="w-0 flex-1 flex">
+                  <div
+                    class="w-0 flex-1 flex rounded bg-gradient-to-b from-orange-500 to-pink-500 m-0.5 mb-0"
+                  >
                     <a
                       @click="premiumAlert"
-                      class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-gray-500"
+                      class="relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-100 font-medium border border-transparent rounded-bl-lg hover:text-gray-100"
                     >
-                      <MailIcon
-                        class="w-5 h-5 text-gray-400"
-                        aria-hidden="true"
-                      />
+                      <MailIcon class="w-5 h-5 text-white" aria-hidden="true" />
                       <span class="ml-3">Send</span>
                     </a>
                   </div>
-                  <div class="-ml-px w-0 flex-1 flex">
+                  <div
+                    class="-ml-px w-0 flex-1 flex rounded bg-gradient-to-b from-blue-500 to-indigo-500 m-0.5 mb-0"
+                  >
                     <a
                       norel
                       noopener
@@ -296,10 +352,10 @@
                       :href="`https://www.whatsonchain.com/tx/${
                         jig.location.split('_')[0]
                       }`"
-                      class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-gray-500"
+                      class="relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm text-gray-100 font-medium border border-transparent rounded-br-lg hover:text-gray-100"
                     >
                       <ShareIcon
-                        class="w-5 h-5 text-gray-400"
+                        class="w-5 h-5 text-gray-100"
                         aria-hidden="true"
                       />
                       <span class="ml-3">View On Chain</span>
@@ -322,24 +378,40 @@
             </div>
             <div class="w-full text-right">
               <button
-                @click="newAddress"
-                class="items-center mt-1 border border-transparent text-base font-medium rounded-full shadow-sm text-blue-500 hover:text-white hover:bg-blue-500 hover:outline-none hover:ring-2 hover:ring-blue-500"
+                @click="premiumAlert"
+                class="items-center mt-1 text-white p-1 px-2 border border-transparent text-base font-medium rounded-full shadow-sm bg-gradient-to-r from-indigo-400 to-blue-500 hover:text-white hover:bg-blue-500 hover:outline-none hover:ring-2 hover:ring-blue-500"
               >
                 New Address
               </button>
             </div>
           </div>
           <hr />
-          <div class="grid grid-cols-2">
-            <div class="col-span-1 text-left">Blockchain Address:</div>
-            <div class="col-span-1 text-xs">{{ userOwnerAddress }}</div>
-            <div class="col-span-1 text-left">VXLockID :</div>
-            <div class="col-span-1 text-xs">{{ user?.uid }}</div>
-            <div class="col-span-1 text-left">Email Address :</div>
-            <div class="col-span-1 text-xs">{{ user?.email }}</div>
-            <div class="col-span-1 text-left">Signing Key :</div>
-            <div class="col-span-1 text-xs"></div>
-            <div class="col-span-2">
+          <div class="pt-1 flex-1 space-y-2">
+            <div class="bg-gray-100 rounded-xl shadow p-2">
+              <div class="col-span-4 text-left">BlockchainID:</div>
+              <div class="col-span-4 text-xs text-left">
+                {{ userOwnerAddress }}
+              </div>
+            </div>
+            <div class="bg-gray-100 rounded-xl shadow p-2">
+              <div class="col-span-4 text-left pt-2">VXLockID :</div>
+              <div class="col-span-4 text-xs pt-1 text-left">
+                {{ user?.uid }}
+              </div>
+            </div>
+            <div class="bg-gray-100 rounded-xl shadow p-2">
+              <div class="col-span-4 text-left pt-2">Email Address :</div>
+              <div class="col-span-4 text-xs pt-1 text-left">
+                {{ user?.email }}
+              </div>
+            </div>
+            <div class="bg-gray-100 rounded-xl shadow p-2">
+              <div class="col-span-4 text-left pt-2">Signing Key :</div>
+              <div class="col-span-4 text-xs pt-1 text-left">
+                {{ userOwnerKey }}
+              </div>
+            </div>
+            <div class="col-span-3">
               <button
                 @click="logout"
                 class="w-full items-center mt-1 border border-transparent text-base font-medium rounded-full shadow-sm text-red-500 hover:text-white hover:bg-red-500 hover:outline-none hover:ring-2 hover:ring-red-500"
@@ -425,6 +497,17 @@ export default {
     } else {
       console.log("User:", store.state.user);
     }
+    console.log(window);
+    let messageToSave = "Aribatrary Message";
+    let signKey = window.bsv.PrivateKey.fromString(
+      "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL"
+    );
+    let signedMessage = window.bsvMessage.sign(messageToSave, signKey);
+    console.log(signedMessage);
+    // let mnemonic = window.bsvMnemonic.fromWords(
+    //   window.bsvMnemonic.WORDS.ENGLISH
+    // );
+    console.log(window.bsvMnemonic.Words.ENGLISH);
     // store.commit(
     //   "setUserPurseKey",
     //   "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38"
@@ -465,19 +548,24 @@ export default {
         owner: "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL",
       });
       let LockerClass = await _run.load(
-        "5b11de644722fdc47f7ac773d3455b6b260a98416935940940b5bb650c0a8fd6_o1"
+        "a6fbd56e08319384853f8df664a0648343080a2efdf7d1d317957636e63842c3_o1"
       );
       console.log(LockerClass);
       await _run.sync();
       console.log(await _run.purse.balance());
-      // let locked = new LockerClass("lock me ");
       let tx = new window.Run.Transaction();
       let messageToSave =
         this.name + ":" + this.message + ":" + new Date().toUTCString();
-      console.log(messageToSave);
+      let signKey = window.bsv.PrivateKey.fromString(_run.owner.privkey);
+      let signedMessage = window.bsvMessage.sign(messageToSave, signKey);
+      console.log(signedMessage);
       try {
         tx.update(() => {
-          new LockerClass(messageToSave);
+          new LockerClass(
+            messageToSave,
+            signedMessage,
+            _run.owner.address.toString()
+          );
         });
         txid = await tx.publish();
         console.log("published", txid);
@@ -501,6 +589,8 @@ export default {
         purse: this.$store.state.userPurseKey,
         owner: "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL",
       });
+      this.$store.commit("setUserOwnerAddress", _run.owner.address);
+      this.$store.commit("setUserOwnerKey", _run.owner.privkey);
       console.log("syncing");
       await _run.inventory.sync();
       console.log("synced");
@@ -519,7 +609,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(["userOwnerAddress", "user"]),
+    ...mapState(["userOwnerAddress", "userOwnerKey", "user"]),
   },
 };
 </script>

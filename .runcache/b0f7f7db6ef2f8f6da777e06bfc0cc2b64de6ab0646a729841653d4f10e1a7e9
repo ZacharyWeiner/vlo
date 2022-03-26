@@ -1,0 +1,1 @@
+{"kind":"code","props":{"deps":{"Jig":{"$jig":"native://Jig"}},"location":"_o1","nonce":1,"origin":"_o1","owner":"1PDkEpjySqdKU3yWF7xkWYMzsAkKs3AAUH","satoshis":0},"src":"class Locker extends Jig {\n    init(message) {\n      this.message = message;\n    }\n  }","version":"04"}

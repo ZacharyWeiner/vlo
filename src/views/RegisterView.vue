@@ -186,9 +186,16 @@
 <script>
 import { reactive, toRefs } from "vue";
 import { useAuth } from "./../composition/useFirebase.js";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 export default {
   setup() {
     let { register } = useAuth(null, null);
+    let store = useStore();
+    let router = useRouter();
+    if (store.state.user?.uid) {
+      router.push("/lock");
+    }
     const state = reactive({
       email: "",
       password: "",
@@ -204,6 +211,10 @@ export default {
   },
   methods: {
     async submit() {
+      if (this.email != this.emailConfirmation) {
+        alert("The passwords do not match");
+        return;
+      }
       console.log(this.email, this.password, this.name);
       let response = await this.register(this.email, this.password, this.name);
       alert(response);

@@ -144,7 +144,7 @@
                   <h1
                     class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl"
                   >
-                    <span class="block">It Amost</span>
+                    <span class="block">It Almost</span>
                     <span
                       class="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-teal-200 to-cyan-400 sm:pb-5"
                       >Like MAGIC</span
@@ -175,7 +175,7 @@
                             type="submit"
                             class="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900"
                           >
-                            Sign Up Today
+                            Get Updates
                           </button>
                         </div>
                       </div>
