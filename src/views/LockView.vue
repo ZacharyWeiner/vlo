@@ -1,5 +1,5 @@
 <template>
-  <nav class="text-gray-100 bg-black">
+  <nav class="text-gray-100 bg-black max-h-screen overflow-y-scroll">
     <!-- <router-link class="text-gray-100" to="/">Home</router-link> |
     <router-link class="text-gray-100" to="/about">About</router-link> | -->
     <router-link class="text-gray-100" to="/lock">Lock</router-link> |
