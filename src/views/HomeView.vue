@@ -226,12 +226,13 @@
                 website.
               </p>
             </div>
-            <div class="mt-12 -mb-10 sm:-mb-24 lg:-mb-80">
-              <img
+            <div class="mt-12 max-w-xl mx-auto pb-6">
+              <home-blockchain-box />
+              <!-- <img
                 class="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
                 src="https://tailwindui.com/img/component-images/green-project-app-screenshot.jpg"
                 alt=""
-              />
+              /> -->
             </div>
           </div>
         </div>
@@ -620,6 +621,7 @@
 
 <script>
 import { useStore } from "vuex";
+import HomeBlockchainBox from "./../components/HomeBlockchainBox.vue";
 import { useRun } from "./../composition/useRun.js";
 import { defineComponent, h } from "vue";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
@@ -843,6 +845,7 @@ export default {
     ExternalLinkIcon,
     MenuIcon,
     XIcon,
+    HomeBlockchainBox,
   },
   setup() {
     let store = useStore();

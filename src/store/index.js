@@ -17,6 +17,8 @@ export default createStore({
     lockerClassLocation:
       "5b11de644722fdc47f7ac773d3455b6b260a98416935940940b5bb650c0a8fd6_o1",
     user: null,
+    anonTitle: "",
+    anonMessage: "",
   },
   getters: {},
   mutations: {
@@ -40,6 +42,12 @@ export default createStore({
     },
     setUser(state, user) {
       state.user = user;
+    },
+    setAnonTitle(state, title) {
+      state.anonTitle = title;
+    },
+    setAnonMessage(state, message) {
+      state.user = message;
     },
   },
   actions: {
