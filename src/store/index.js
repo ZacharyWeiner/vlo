@@ -57,6 +57,14 @@ export default createStore({
       commit("setUserOwnerKey", _userOwnerKey);
       commit("setUserOwnerAddress", _userOwnerAddress);
     },
+    logout({ commit }, router) {
+      commit("setUserSeed", "");
+      commit("setUserPurseKey", "");
+      commit("setUserPurseAddress", "");
+      commit("setUserOwnerKey", "");
+      commit("setUserOwnerAddress", "");
+      router.push("/");
+    },
   },
   modules: {},
   plugins: [vuexLocal.plugin],

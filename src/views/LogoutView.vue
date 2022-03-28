@@ -16,7 +16,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.commit("setUser", null);
+    this.$store.dispatch("logout", this.$router);
   },
 };
 </script>

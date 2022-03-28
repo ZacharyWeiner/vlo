@@ -1,6 +1,7 @@
-import Run from "run-sdk";
-import BSV from "bsv";
-import Mnemonic from "bsv/mnemonic";
+let Run = window.Run;
+let BSV = window.bsv;
+let Message = window.bsvMessage;
+let Mnemonic = window.bsvMnemonic;
 import { useStore } from "vuex";
 let payPath = "m/44'/236'/0'/1/0";
 let dpath = "m/44'/236'/0'/2/0";
@@ -48,6 +49,20 @@ export function useRun() {
     return run;
   };
 
+  const setupAnonAccount = () => {
+    let mnemonic = new Mnemonic(Mnemonic.Words.ENGLISH);
+    console.log(mnemonic.toSeed());
+    let messageToSave = "Aribatrary Message";
+    let signKey = BSV.PrivateKey.fromString(
+      "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL"
+    );
+    let signedMessage = Message.sign(messageToSave, signKey);
+    console.log({ signedMessage });
+    run = new Run({});
+    let purseAddress = run.purse.address;
+    console.log({ purseAddress });
+  };
+
   const lock = async (message) => {
     // let LockClass = await run.load("lock class location");
     // let post = new Lock(message);
@@ -55,5 +70,5 @@ export function useRun() {
     return message;
   };
 
-  return { run, loginWithSeed, lock };
+  return { run, loginWithSeed, lock, setupAnonAccount };
 }

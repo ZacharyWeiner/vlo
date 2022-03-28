@@ -619,6 +619,8 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
+import { useRun } from "./../composition/useRun.js";
 import { defineComponent, h } from "vue";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import {
@@ -843,18 +845,20 @@ export default {
     XIcon,
   },
   setup() {
-    // eslint-disable-next-line no-undef
-    var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
-    //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
-
-    // eslint-disable-next-line no-undef
-    var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
-    console.log(decrypted);
+    let store = useStore();
+    let run = useRun();
+    if (store.state.userOwnerAddress === "") {
+      console.log(window.bsvMnemonic.Words.ENGLISH);
+      run.setupAnonAccount(window.bsvMnemonic, window.run);
+    } else {
+      console.log(`Owner Address ${store.state.userOwnerAddress} At Homepage`);
+    }
     return {
       navigation,
       features,
       blogPosts,
       footerNavigation,
+      run,
     };
   },
 };
