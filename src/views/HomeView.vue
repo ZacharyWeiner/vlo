@@ -846,7 +846,6 @@ export default {
     let store = useStore();
     let run = useRun();
     if (store.state.userOwnerAddress === "") {
-      console.log(window.bsvMnemonic.Words.ENGLISH);
       run.setupAnonAccount(window.bsvMnemonic, window.run);
     } else {
       console.log(`Owner Address ${store.state.userOwnerAddress} At Homepage`);

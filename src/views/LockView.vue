@@ -449,17 +449,6 @@ import {
   //PhoneIcon,
   ShareIcon,
 } from "@heroicons/vue/solid";
-
-const assignees = [
-  { name: "Unassigned", value: null },
-  {
-    name: "Wade Cooper",
-    value: "wade-cooper",
-    avatar:
-      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-  // More items...
-];
 const labels = [
   { name: "Unlabelled", value: null },
   { name: "Engineering", value: "engineering" },
@@ -476,19 +465,14 @@ export default {
     Listbox,
     ListboxButton,
     ListboxLabel,
-    //ListboxOption,
-    //ListboxOptions,
     CalendarIcon,
     PaperClipIcon,
     TagIcon,
-    //UserCircleIcon,
     MailIcon,
-    //PhoneIcon,
     ShareIcon,
   },
   setup() {
     let router = useRouter();
-    //const assigned = ref(assignees[0]);
     const labelled = ref(labels[0]);
     const dated = ref(dueDates[0]);
     let store = useStore();
@@ -531,10 +515,6 @@ export default {
     return {
       ...toRefs(state),
       enabled,
-      assignees,
-      labels,
-      dueDates,
-      //assigned,
       labelled,
       dated,
     };

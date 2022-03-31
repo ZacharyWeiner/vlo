@@ -7,6 +7,7 @@ import LogoutView from "../views/LogoutView.vue";
 import PaymentView from "../views/PaymentView.vue";
 import PricingView from "../views/PricingView.vue";
 import SuccessfulPayment from "../views/SuccessfulPayment.vue";
+import ProfileView from "../views/ProfileView.vue";
 
 const routes = [
   {
@@ -19,6 +20,12 @@ const routes = [
     name: "Lock",
     component: LockView,
   },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: ProfileView,
+  },
+
   {
     path: "/login",
     name: "Login",
