@@ -103,19 +103,21 @@
           </div>
         </form>
 
-        <!-- <div class="mt-6">
+        <div class="mt-6">
           <div class="relative">
             <div class="absolute inset-0 flex items-center">
               <div class="w-full border-t border-gray-300" />
             </div>
             <div class="relative flex justify-center text-sm">
               <span class="px-2 bg-white text-gray-500">
-                Or continue with
+                HAVE AN ACCOUNT?
               </span>
             </div>
           </div>
-
-          <div class="mt-6 grid grid-cols-3 gap-3">
+          <router-link to="/login" class="pt-2 text-indigo-600">
+            login
+          </router-link>
+          <!-- <div class="mt-6 grid grid-cols-3 gap-3">
             <div>
               <a
                 href="#"
@@ -176,8 +178,8 @@
                 </svg>
               </a>
             </div>
-          </div>
-        </div> -->
+          </div> -->
+        </div>
       </div>
     </div>
   </div>

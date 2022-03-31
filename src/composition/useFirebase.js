@@ -19,6 +19,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
+const locksRaw = firestore.collection("locks");
 const locksCollection = firestore
   .collection("locks")
   .orderBy("createdAt", "desc");
@@ -36,7 +37,7 @@ export function useFirebase(_userId, _address) {
 
   const addLock = async (_message) => {
     console.log("About to lock", _userId, _address, _message);
-    let response = await locksCollection.add({
+    let response = await locksRaw.add({
       userId: _userId,
       address: _address,
       message: _message,
@@ -65,9 +66,9 @@ export function useAuth() {
 
   const signIn = async (email, password) => {
     console.log(email, password);
+    let response;
     const auth = getAuth();
-    let response = await signInWithEmailAndPassword(auth, email, password);
-    console.log(response);
+    response = await signInWithEmailAndPassword(auth, email, password);
     return response;
   };
 

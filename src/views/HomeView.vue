@@ -227,12 +227,7 @@
               </p>
             </div>
             <div class="mt-12 max-w-xl mx-auto pb-6">
-              <home-blockchain-box />
-              <!-- <img
-                class="rounded-lg shadow-xl ring-1 ring-black ring-opacity-5"
-                src="https://tailwindui.com/img/component-images/green-project-app-screenshot.jpg"
-                alt=""
-              /> -->
+              <home-blockchain-box @anon-message-set.once="nextPage" />
             </div>
           </div>
         </div>
@@ -863,6 +858,16 @@ export default {
       footerNavigation,
       run,
     };
+  },
+  methods: {
+    nextPage() {
+      console.log("Next Page Called ....");
+      if (this.$store.state.user !== "") {
+        this.$router.push("/lock");
+      } else {
+        this.$router.push("/register");
+      }
+    },
   },
 };
 </script>

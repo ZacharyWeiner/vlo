@@ -513,10 +513,17 @@ export default {
     //   "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38"
     // );
     let enabled = false;
+    let _title = "";
+    if (store.state.anonTitle !== "") {
+      _title = store.state.anonTitle;
+    }
+    if (store.state.anonMessage !== "") {
+      _title = store.state.anonMessage;
+    }
     const state = reactive({
       count: 0,
       newSeed: "",
-      name: "",
+      name: _title,
       message: "",
       jigs: store.state.userLocks,
       selectedLock: null,
@@ -574,11 +581,14 @@ export default {
           _run.owner.address
         );
         response = await addLock(messageToSave);
-        console.log(response);
+        console.log({ response });
         this.message = "";
         this.name = "";
+        this.$store.dispatch("clearLockBoxes");
+        await this.getLocked();
       } catch (err) {
         response = err;
+        console.log({ err });
       }
       return response;
     },

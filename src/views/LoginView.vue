@@ -30,6 +30,7 @@
 
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <span class="text-red-500"> {{ errorMessage }}</span>
         <!-- <form class="space-y-6" action="#" method="POST"> -->
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">
@@ -79,12 +80,12 @@
           </div>
 
           <div class="text-sm">
-            <a
+            <!-- <a
               href="#"
               class="font-medium text-indigo-600 hover:text-indigo-500"
             >
               Forgot your password?
-            </a>
+            </a> -->
           </div>
         </div>
 
@@ -193,6 +194,7 @@ export default {
     const state = reactive({
       email: "",
       password: "",
+      errorMessage: "",
     });
 
     return {
@@ -203,14 +205,14 @@ export default {
   methods: {
     async login() {
       console.log(this.email, this.password);
-      let response = await this.signIn(this.email, this.password);
-      if (response?.errorMessage) {
-        console.log(response.errorMessage);
-        alert("There was an error:", response.errorMessage);
-      } else {
-        console.log(response);
+      let response;
+      try {
+        response = await this.signIn(this.email, this.password);
         this.$store.commit("setUser", response.user);
         this.$router.push("/lock");
+      } catch (err) {
+        console.log(err);
+        this.errorMessage = "The username or password is incorrect";
       }
     },
   },

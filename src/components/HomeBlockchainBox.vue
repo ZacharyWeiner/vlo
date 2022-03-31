@@ -10,7 +10,7 @@
         name="title"
         id="title"
         class="block w-full border-0 pl-2.5 pt-2.5 text-lg font-medium placeholder-gray-500 focus:ring-0"
-        placeholder="Title"
+        placeholder="Give your note a title."
       />
       <label for="description" class="sr-only">Description</label>
       <textarea
@@ -36,8 +36,8 @@
         <div class="flex"></div>
         <div class="flex-shrink-0">
           <button
-            @click="saveinState"
-            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            @click="saveInState"
+            class="inline-flex items-center px-4 py-2 border border-0 text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-teal-500 to-teal-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Create
           </button>
@@ -71,9 +71,10 @@ export default {
     };
   },
   methods: {
-    saveinState() {
+    saveInState() {
       this.$store.commit("setAnonTitle", this.title);
       this.$store.commit("setAnonMessage", this.message);
+      this.$emit("anonMessageSet");
     },
   },
 };

@@ -47,7 +47,7 @@ export default createStore({
       state.anonTitle = title;
     },
     setAnonMessage(state, message) {
-      state.user = message;
+      state.anonMessage = message;
     },
   },
   actions: {
@@ -66,12 +66,17 @@ export default createStore({
       commit("setUserOwnerAddress", _userOwnerAddress);
     },
     logout({ commit }, router) {
+      commit("setUser", "");
       commit("setUserSeed", "");
       commit("setUserPurseKey", "");
       commit("setUserPurseAddress", "");
       commit("setUserOwnerKey", "");
       commit("setUserOwnerAddress", "");
       router.push("/");
+    },
+    clearLockBoxes({ commit }) {
+      commit("setAnonTitle", "");
+      commit("setAnonMessage", "");
     },
   },
   modules: {},
