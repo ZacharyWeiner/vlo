@@ -9,13 +9,13 @@ import { ref, onUnmounted } from "vue";
 // import  {config}  from './../config'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBmsWrILQoPrACmKJJq22lOnuWUXdvo28Q",
-  authDomain: "vx-corp-demo.firebaseapp.com",
-  projectId: "vx-corp-demo",
-  storageBucket: "vx-corp-demo.appspot.com",
-  messagingSenderId: "986869729116",
-  appId: "1:986869729116:web:88ba63abe702ec68082399",
-  measurementId: "G-S0Y78RNGCD",
+  apiKey: "",
+  authDomain: ".firebaseapp.com",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
 };
 firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();

@@ -530,6 +530,9 @@ const dueDates = [
   { name: "Today", value: "today" },
   // More items...
 ];
+const purseKey = ""; //TODO: REPLACE ON DEV BRANCH AND DO NOT CHECK IN.
+const lockClassLocation =
+  "a6fbd56e08319384853f8df664a0648343080a2efdf7d1d317957636e63842c3_o1";
 export default {
   components: {
     Switch,
@@ -553,21 +556,6 @@ export default {
     } else {
       console.log("User:", store.state.user);
     }
-    console.log(window);
-    let messageToSave = "Aribatrary Message";
-    let signKey = window.bsv.PrivateKey.fromString(
-      "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL"
-    );
-    let signedMessage = window.bsvMessage.sign(messageToSave, signKey);
-    console.log(signedMessage);
-    // let mnemonic = window.bsvMnemonic.fromWords(
-    //   window.bsvMnemonic.WORDS.ENGLISH
-    // );
-    console.log(window.bsvMnemonic.Words.ENGLISH);
-    store.commit(
-      "setUserPurseKey",
-      "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38"
-    );
     let enabled = false;
     let _title = "";
     if (store.state.anonTitle !== "") {
@@ -603,12 +591,10 @@ export default {
       }
       let _run = new window.Run({
         trust: "*",
-        purse: "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38",
-        owner: "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL",
+        purse: purseKey,
+        owner: this.$store.state.userOwnerKey,
       });
-      let LockerClass = await _run.load(
-        "a6fbd56e08319384853f8df664a0648343080a2efdf7d1d317957636e63842c3_o1"
-      );
+      let LockerClass = await _run.load(lockClassLocation);
       console.log(LockerClass);
       await _run.sync();
       console.log(await _run.purse.balance());
@@ -645,11 +631,11 @@ export default {
       return response;
     },
     async getLocked() {
-      console.log(this.$store.state.userPurseKey);
+      console.log("Purse Key Should be set in developement.");
       let _run = new window.Run({
         trust: "*",
-        purse: this.$store.state.userPurseKey,
-        owner: "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL",
+        purse: purseKey,
+        owner: this.$store.state.userOwnerKey,
       });
       this.$store.commit("setUserOwnerAddress", _run.owner.address);
       this.$store.commit("setUserOwnerKey", _run.owner.privkey);

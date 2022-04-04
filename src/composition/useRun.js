@@ -53,14 +53,12 @@ export function useRun() {
     let mnemonic = new Mnemonic(Mnemonic.Words.ENGLISH);
     console.log(mnemonic.toSeed());
     let messageToSave = "Aribatrary Message";
-    let signKey = BSV.PrivateKey.fromString(
-      "L2vg4igrv21c9H8LYkbZYj2XHmmYw8wMxyFni4pVM6ADtykxEbUL"
-    );
-    let signedMessage = Message.sign(messageToSave, signKey);
-    console.log({ signedMessage });
     run = new Run({});
     let purseAddress = run.purse.address;
     console.log({ purseAddress });
+    let signKey = BSV.PrivateKey.fromString(run.purse.privateKey.toString());
+    let signedMessage = Message.sign(messageToSave, signKey);
+    console.log({ signedMessage });
   };
 
   const lock = async (message) => {
