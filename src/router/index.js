@@ -8,6 +8,7 @@ import PaymentView from "../views/PaymentView.vue";
 import PricingView from "../views/PricingView.vue";
 import SuccessfulPayment from "../views/SuccessfulPayment.vue";
 import ProfileView from "../views/ProfileView.vue";
+import LockLaterView from "../views/ProfileView.vue";
 
 const routes = [
   {
@@ -21,11 +22,15 @@ const routes = [
     component: LockView,
   },
   {
+    path: "/lock-later",
+    name: "Lock Later",
+    component: LockLaterView,
+  },
+  {
     path: "/profile",
     name: "Profile",
     component: ProfileView,
   },
-
   {
     path: "/login",
     name: "Login",

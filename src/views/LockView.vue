@@ -1,12 +1,5 @@
 <template>
-  <nav class="text-gray-100 bg-black max-h-screen overflow-y-scroll">
-    <!-- <router-link class="text-gray-100" to="/">Home</router-link> |
-    <router-link class="text-gray-100" to="/about">About</router-link> | -->
-    <router-link class="text-gray-100" to="/lock">Lock</router-link> |
-    <!-- <router-link class="text-gray-100" to="/register">Register</router-link> |
-    <router-link class="text-gray-100" to="/login">Login</router-link> | -->
-    <router-link class="text-gray-100" to="/logout">Logout</router-link>
-  </nav>
+  <logged-in-menu />
   <div class="w-full h-screen font-roboto">
     <div class="grid grid-cols-1 lg:grid-cols-7">
       <!--  COLUMN 1 NEW LOCK FORM  -->
@@ -288,6 +281,90 @@
               </div>
             </div>
           </div>
+          <div
+            class="overflow-y-scroll flex-1 space-y-2"
+            style="max-height: 800px"
+          >
+            <div
+              class="flex rounded bg-white"
+              v-for="jig in jigs"
+              :key="jig.location"
+              @click="loadLock(jig)"
+            >
+              <div class="w-4/6 flex-1 text-left pl-1">
+                <div class="flex w-full">
+                  <div class="text-xl font-bold w-full">
+                    {{ jig.message.split(":")[0] }}
+                  </div>
+                </div>
+                <div>{{ jig.message.split(":")[1] }}</div>
+              </div>
+              <div class="w-1/5"></div>
+              <div class="w-1/5">
+                <div class="flex mb-1">
+                  <div
+                    class="flex-shrink-0 inline-block px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full"
+                  >
+                    {{
+                      jig.message
+                        .split(":")[2]
+                        ?.substring(0, jig.message.split(":")[2].length - 2)
+                    }}
+                  </div>
+                </div>
+                <div
+                  class="flex-1 flex mt-2 p-1 rounded bg-gradient-to-b from-blue-500 to-indigo-500 m-0.5 mb-0 mx-auto"
+                >
+                  <a
+                    norel
+                    noopener
+                    target="_blank"
+                    :href="`https://www.whatsonchain.com/tx/${
+                      jig.location.split('_')[0]
+                    }`"
+                    class="text-center mx-auto text-white"
+                  >
+                    <div class="flex">
+                      <div>
+                        <EyeIcon
+                          class="w-4 h-4 mt-1 text-white"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div>
+                        <span class="ml-3">View</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div
+                  class="flex-1 flex mt-2 p-1 rounded bg-gradient-to-b from-orange-500 to-pink-500 m-0.5 mb-0 mx-auto"
+                >
+                  <a
+                    norel
+                    noopener
+                    target="_blank"
+                    :href="`https://www.whatsonchain.com/tx/${
+                      jig.location.split('_')[0]
+                    }`"
+                    class="text-center mx-auto text-white"
+                  >
+                    <div class="flex">
+                      <div>
+                        <MailIcon
+                          class="w-4 h-4 mt-1 text-white"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <div>
+                        <span class="ml-3">Send</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
           <ul
             role="list"
             class="grid grid-cols-1 gap-6 overflow-y-scroll"
@@ -431,23 +508,17 @@
 
 import { reactive, ref, toRefs } from "vue";
 import { useStore, mapState } from "vuex";
+import LoggedInMenu from "./../components/LoggedInMenu.vue";
 import { useFirebase } from "./../composition/useFirebase.js";
 import { Switch } from "@headlessui/vue";
 import { useRouter } from "vue-router";
-import {
-  Listbox,
-  ListboxButton,
-  ListboxLabel,
-  //ListboxOption,
-  //ListboxOptions,
-} from "@headlessui/vue";
+import { Listbox, ListboxButton, ListboxLabel } from "@headlessui/vue";
 import {
   CalendarIcon,
   PaperClipIcon,
   TagIcon,
   MailIcon,
-  //PhoneIcon,
-  ShareIcon,
+  EyeIcon,
 } from "@heroicons/vue/solid";
 const labels = [
   { name: "Unlabelled", value: null },
@@ -469,7 +540,8 @@ export default {
     PaperClipIcon,
     TagIcon,
     MailIcon,
-    ShareIcon,
+    EyeIcon,
+    LoggedInMenu,
   },
   setup() {
     let router = useRouter();
@@ -492,10 +564,10 @@ export default {
     //   window.bsvMnemonic.WORDS.ENGLISH
     // );
     console.log(window.bsvMnemonic.Words.ENGLISH);
-    // store.commit(
-    //   "setUserPurseKey",
-    //   "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38"
-    // );
+    store.commit(
+      "setUserPurseKey",
+      "KwZw2apQ2HJnTbnN6f26YzmYhU9KEmiCrb7HaVDi2MFnXLq6aH38"
+    );
     let enabled = false;
     let _title = "";
     if (store.state.anonTitle !== "") {

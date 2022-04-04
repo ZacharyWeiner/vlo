@@ -622,12 +622,9 @@ import { defineComponent, h } from "vue";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
 import {
   CloudUploadIcon,
-  // CogIcon,
   LockClosedIcon,
   MenuIcon,
   RefreshIcon,
-  // ServerIcon,
-  // ShieldCheckIcon,
   XIcon,
 } from "@heroicons/vue/outline";
 import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/vue/solid";
