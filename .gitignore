@@ -6,7 +6,7 @@ node_modules
 # local env files
 .env.local
 .env.*.local
-
+/src/scripts/firebaseScriptConfig.json
 # Log files
 npm-debug.log*
 yarn-debug.log*
